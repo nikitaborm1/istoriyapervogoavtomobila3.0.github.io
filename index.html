@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История первого автомобиля</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.3rem;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        .page {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            animation: fadeIn 0.5s ease-in;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h2 {
+            color: #2c3e50;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 0.5rem;
+        }
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        .text-content {
+            line-height: 1.7;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+        .text-content p {
+            margin-bottom: 1rem;
+        }
+        .image-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .image-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .image-card img {
+            width: 100%;
+            max-width: 500px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        .image-card img:hover {
+            transform: scale(1.02);
+        }
+        .image-caption {
+            margin-top: 0.8rem;
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 0.95rem;
+        }
+        .timeline {
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid #e74c3c;
+            margin: 1.5rem 0;
+        }
+        .timeline-item {
+            background: white;
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .invention-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .fact-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .fact-card:hover {
+            transform: translateY(-5px);
+        }
+        .fact-card h3 {
+            color: #e74c3c;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .nav-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚗 История первого автомобиля</h1>
+            <div class="subtitle">От паровых телег до современных машин</div>
+        </header>
+
+        <nav>
+            <button class="nav-btn" onclick="showPage('page1')">Первый автомобиль</button>
+            <button class="nav-btn" onclick="showPage('page2')">Развитие автоиндустрии</button>
+            <button class="nav-btn" onclick="showPage('page3')">Современная эра</button>
+        </nav>
+
+        <!-- Страница 1: Первый автомобиль -->
+        <div id="page1" class="page active">
+            <h2>Карл Бенц и первый автомобиль</h2>
+            <div class="content">
+                <div class="text-content">
+                    <p>29 января 1886 года Карл Бенц подал заявку на патент для своего "транспортного средства, работающего на бензине". Этот день считается днем рождения автомобиля.</p>
+                    <p>Первый автомобиль Бенца - Benz Patent-Motorwagen - был трехколесным экипажем с двигателем внутреннего сгорания мощностью 0,75 лошадиных сил. Максимальная скорость составляла 16 км/ч.</p>
+                    
+                    <div class="timeline">
+                        <h3>Хронология создания:</h3>
+                        <div class="timeline-item">
+                            <strong>1879:</strong> Бенц создает свой первый двухтактный двигатель
+                        </div>
+                        <div class="timeline-item">
+                            <strong>1885:</strong> Завершена работа над Motorwagen
+                        </div>
+                        <div class="timeline-item">
+                            <strong>29.01.1886:</strong> Получен патент DRP-37435
+                        </div>
+                        <div class="timeline-item">
+                            <strong>03.07.1886:</strong> Первые публичные испытания
+                        </div>
+                    </div>
+
+                    <div class="invention-facts">
+                        <div class="fact-card">
+                            <h3>⚙️ Технические данные</h3>
+                            <p>Объем двигателя: 954 см³<br>Мощность: 0,75 л.с.<br>Вес: 265 кг</p>
+                        </div>
+                        <div class="fact-card">
+                            <h3>💰 Стоимость</h3>
+                            <p>Первый автомобиль стоил 600 немецких марок - целое состояние по тем временам</p>
+                        </div>
+                        <div class="fact-card">
+                            <h3>🏆 Инновации</h3>
+                            <p>Электрическое зажигание, карбюратор, водяное охлаждение</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="image-section">
+                    <div class="image-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Patent-Motorwagen_Nr.1_Benz_2.jpg/1200px-Patent-Motorwagen_Nr.1_Benz_2.jpg" alt="Первый автомобиль Бенца">
+                        <div class="image-caption">Benz Patent-Motorwagen (1886) - первый в мире автомобиль</div>
+                    </div>
+                    <div class="image-card">
+                        <img src="https://avatars.dzeninfra.ru/get-zen_doc/271828/pub_68aed8d399a5df6445a93574_68aedb0fae1fe46cbf22802b/scale_1200" alt="Карл Бенц">
+                        <div class="image-caption">Карл Бенц (1844-1929) - изобретатель автомобиля</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Страница 2: Развитие автоиндустрии -->
+        <div id="page2" class="page">
+            <h2>Развитие автомобильной индустрии</h2>
+            <div class="content">
+                <div class="text-content">
+                    <p>После изобретения Бенца автомобильная промышленность начала стремительно развиваться. Готлиб Даймлер и Вильгельм Майбах создали свой первый четырехколесный автомобиль в 1889 году.</p>
+                    <p>В 1908 году Генри Форд представил Model T и внедрил конвейерное производство, сделав автомобиль доступным для среднего класса.</p>
+                    
+                    <div class="timeline">
+                        <h3>Ключевые этапы развития:</h3>
+                        <div class="timeline-item">
+                            <strong>1889:</strong> Даймлер и Майбах создают первый четырехколесный автомобиль
+                        </div>
+                        <div class="timeline-item">
+                            <strong>1908:</strong> Появление Ford Model T
+                        </div>
+                        <div class="timeline-item">
+                            <strong>1913:</strong> Внедрение конвейерного производства
+                        </div>
+                        <div class="timeline-item">
+                            <strong>1920-е:</strong> Массовая автомобилизация в США
+                        </div>
+                    </div>
+
+                    <h3>Основные производители начала XX века:</h3>
+                    <ul style="margin-left: 2rem; line-height: 1.8;">
+                        <li><strong>Mercedes-Benz</strong> (Германия, 1926)</li>
+                        <li><strong>Ford</strong> (США, 1903)</li>
+                        <li><strong>Renault</strong> (Франция, 1899)</li>
+                        <li><strong>Fiat</strong> (Италия, 1899)</li>
+                        <li><strong>Rolls-Royce</strong> (Великобритания, 1906)</li>
+                    </ul>
+                </div>
+                
+                <div class="image-section">
+                    <div class="image-card">
+                        <img src="https://media.2x2tv.ru/content/images/2024/07/ghows-PJ-8e084f1e-8680-5d64-e053-0100007fe98b-154e515a.jpeg.webp" alt="Ford Model T">
+                        <div class="image-caption">Ford Model T (1908) - автомобиль, изменивший мир</div>
+                    </div>
+                    <div class="image-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Daimler_Reitwagen.JPG/1200px-Daimler_Reitwagen.JPG" alt="Даймлер и Майбах">
+                        <div class="image-caption">Мотоцикл Даймлера (1885) - предшественник автомобиля</div>
+                    </div>
+                    <div class="image-card">
+                        <img src="https://www.opelpost.com/wp-content/uploads/2014/05/OP04_14_Fertigung.jpg" alt="Конвейер Форда">
+                        <div class="image-caption">Первая конвейерная линия Форда (1913)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Страница 3: Современная эра -->
+        <div id="page3" class="page">
+            <h2>Современная автомобильная эра</h2>
+            <div class="content">
+                <div class="text-content">
+                    <p>Сегодня автомобильная промышленность переживает революцию: электрические автомобили, автономное вождение и экологичные технологии становятся новой нормой.</p>
+                    <p>Компании как Tesla, Toyota и Volkswagen инвестируют миллиарды в разработку автомобилей будущего.</p>
+                    
+                    <div class="invention-facts">
+                        <div class="fact-card">
+                            <h3>🔋 Электромобили</h3>
+                            <p>Tesla Model S: запас хода 600+ км<br>Быстрая зарядка за 30 минут</p>
+                        </div>
+                        <div class="fact-card">
+                            <h3>🤖 Автономное вождение</h3>
+                            <p>Уровень 4 автономности<br>Компьютерное зрение и ИИ</p>
+                        </div>
+                        <div class="fact-card">
+                            <h3>🌱 Экология</h3>
+                            <p>Водородные двигатели<br>Перерабатываемые материалы</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline">
+                        <h3>Тренды современности:</h3>
+                        <div class="timeline-item">
+                            <strong>Электрификация:</strong> К 2030 году 50% новых автомобилей будут электрическими
+                        </div>
+                        <div class="timeline-item">
+                            <strong>Автономность:</strong> Полностью автономные автомобили к 2025 году
+                        </div>
+                        <div class="timeline-item">
+                            <strong>Каршеринг:</strong> Совместное использование вместо владения
+                        </div>
+                        <div class="timeline-item">
+                            <strong>Безопасность:</strong> Системы предотвращения столкновений
+                        </div>
+                    </div>
+
+                    <p>От трехколесного экипажа Бенца до современных гиперкаров - автомобиль прошел впечатляющий путь развития, продолжая менять наш мир каждый день.</p>
+                </div>
+                
+                <div class="image-section">
+                    <div class="image-card">
+                        <img src="https://s00.yaplakal.com/pics/pics_original/0/8/5/20365580.jpg" alt="Tesla Model S">
+                        <div class="image-caption">Tesla Model S - революция в электромобилях</div>
+                    </div>
+                    <div class="image-card">
+                        <img src="https://i.dailymail.co.uk/1s/2024/03/13/17/82428509-13193053-image-a-138_1710349971668.jpg" alt="Автономный автомобиль">
+                        <div class="image-caption">Автономный автомобиль Waymo</div>
+                    </div>
+                    <div class="image-card">
+                        <img src="https://www.autoblog.com/.image/w_3840,q_auto:good,c_limit/NzowMDAwMDAwMDAwOTU5MzY2/image-14-959366.jpg" alt="Современный гиперкар">
+                        <div class="image-caption">Bugatti Chiron - современный гиперкар</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
